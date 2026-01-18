@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/card_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Gradient Background for Header -->
+        <View
+            android:id="@+id/gradientHeader"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/card_gradient_primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Routine Name -->
+        <TextView
+            android:id="@+id/tvRoutineName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Workout Routine"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_on_primary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="@+id/gradientHeader"
+            app:layout_constraintStart_toStartOf="@+id/gradientHeader"
+            app:layout_constraintEnd_toStartOf="@+id/cbCompleted"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Completed Checkbox -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textColor="@color/text_on_primary"
+            app:buttonTint="@color/text_on_primary"
+            app:layout_constraintTop_toTopOf="@+id/gradientHeader"
+            app:layout_constraintEnd_toEndOf="@+id/gradientHeader"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/gradientHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Action Buttons Row 1 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSchedule"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Schedule"
+            android:textSize="14sp"
+            android:textColor="@color/text_on_primary"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="12dp"
+            app:elevation="2dp"
+            app:icon="@android:drawable/ic_menu_today"
+            app:iconTint="@color/text_on_primary"
+            app:iconGravity="textStart"
+            app:iconPadding="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnEdit"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Edit"
+            android:textSize="14sp"
+            android:textColor="@color/text_on_accent"
+            app:backgroundTint="@color/accent"
+            app:cornerRadius="12dp"
+            app:elevation="2dp"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:iconTint="@color/text_on_accent"
+            app:iconGravity="textStart"
+            app:iconPadding="4dp"
+            app:layout_constraintTop_toTopOf="@+id/btnSchedule"
+            app:layout_constraintStart_toEndOf="@+id/btnSchedule"
+            app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Delete"
+            android:textSize="14sp"
+            android:textColor="@color/error"
+            app:cornerRadius="12dp"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconTint="@color/error"
+            app:iconGravity="textStart"
+            app:iconPadding="4dp"
+            app:strokeColor="@color/error"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toTopOf="@+id/btnEdit"
+            app:layout_constraintStart_toEndOf="@+id/btnEdit"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="6dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+        <!-- Action Buttons Row 2 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelegate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Delegate"
+            android:textSize="14sp"
+            android:textColor="@color/text_on_secondary"
+            app:backgroundTint="@color/secondary"
+            app:cornerRadius="12dp"
+            app:elevation="2dp"
+            app:icon="@android:drawable/ic_menu_send"
+            app:iconTint="@color/text_on_secondary"
+            app:iconGravity="textStart"
+            app:iconPadding="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnSchedule"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnComplete"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnComplete"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Complete"
+            android:textSize="14sp"
+            android:textColor="@color/text_on_primary"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="12dp"
+            app:elevation="2dp"
+            app:icon="@android:drawable/checkbox_on_background"
+            app:iconTint="@color/text_on_primary"
+            app:iconGravity="textStart"
+            app:iconPadding="4dp"
+            app:layout_constraintTop_toTopOf="@+id/btnDelegate"
+            app:layout_constraintStart_toEndOf="@+id/btnDelegate"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="6dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

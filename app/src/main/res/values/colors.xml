@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Primary Color Palette - Cyan/Turquoise Theme -->
+    <color name="primary">#2ED3CA</color>
+    <color name="primary_dark">#1FA89F</color>
+    <color name="primary_light">#5FE8E0</color>
+    <color name="primary_variant">#1BC4BA</color>
+    
+    <!-- Accent Color Palette - Blue Theme (replacing magenta) -->
+    <color name="accent">#0593B7</color>
+    <color name="accent_dark">#04708A</color>
+    <color name="accent_light">#0AB3D9</color>
+    <color name="accent_variant">#036B85</color>
+    
+    <!-- Secondary Color Palette - Blue-Cyan Blend -->
+    <color name="secondary">#1A9DB0</color>
+    <color name="secondary_dark">#147A8A</color>
+    <color name="secondary_light">#2ED3CA</color>
+    <color name="secondary_variant">#0F6B7A</color>
+    
+    <!-- Background Colors -->
+    <color name="background_light">#F5F7FA</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F8F9FA</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_secondary_dark">#D1D5DB</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="text_disabled">#D1D5DB</color>
+    
+    <!-- Text on Colored Backgrounds -->
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_accent">#FFFFFF</color>
+    <color name="text_on_secondary">#FFFFFF</color>
+    <color name="text_on_surface">#1A1A1A</color>
+    
+    <!-- Error Colors -->
+    <color name="error">#DC2626</color>
+    <color name="error_dark">#B91C1C</color>
+    <color name="error_light">#FEE2E2</color>
+    <color name="text_on_error">#FFFFFF</color>
+    
+    <!-- Success Colors -->
+    <color name="success">#10B981</color>
+    <color name="success_dark">#059669</color>
+    <color name="success_light">#D1FAE5</color>
+    <color name="text_on_success">#FFFFFF</color>
+    
+    <!-- Warning Colors -->
+    <color name="warning">#F59E0B</color>
+    <color name="warning_dark">#D97706</color>
+    <color name="warning_light">#FEF3C7</color>
+    
+    <!-- Info Colors -->
+    <color name="info">#3B82F6</color>
+    <color name="info_dark">#2563EB</color>
+    <color name="info_light">#DBEAFE</color>
+    
+    <!-- Card Colors -->
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_elevation">#E5E7EB</color>
+    <color name="card_stroke">#E5E7EB</color>
+    
+    <!-- Divider Colors -->
+    <color name="divider">#E5E7EB</color>
+    <color name="divider_dark">#374151</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_light">#80000000</color>
+    <color name="overlay_dark">#80FFFFFF</color>
+    
+    <!-- Ripple Colors -->
+    <color name="ripple_primary">#402ED3CA</color>
+    <color name="ripple_accent">#400593B7</color>
+    <color name="ripple_secondary">#401A9DB0</color>
+</resources>
