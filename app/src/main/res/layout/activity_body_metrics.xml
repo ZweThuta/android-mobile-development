@@ -4,154 +4,273 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:fillViewport="true"
     tools:context=".BodyMetricsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:background="@drawable/gradient_header_bw"
+            android:padding="28dp"
+            android:paddingTop="56dp"
+            android:paddingBottom="32dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
+                android:gravity="center_vertical">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@android:drawable/ic_menu_view"
-                    android:contentDescription="Metrics icon"
-                    android:layout_marginEnd="12dp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    android:layout_marginEnd="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_view"
+                        android:contentDescription="Metrics icon"
+                        android:tint="#FFFFFF"
+                        android:layout_gravity="center" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Body Metrics"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Body Metrics"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:letterSpacing="0.02" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Track your body measurements"
+                        android:textSize="14sp"
+                        android:textColor="#CCCCCC"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-light" />
+                </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
+
+        <!-- Content Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <!-- BMI Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:layout_marginBottom="16dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#333333"
+                app:cardBackgroundColor="#0D0D0D"
+                android:layout_marginBottom="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp"
+                    android:padding="24dp"
                     android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BMI"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/darker_gray" />
+                        android:text="Your BMI"
+                        android:textSize="14sp"
+                        android:textColor="#999999"
+                        android:fontFamily="sans-serif-light"
+                        android:letterSpacing="0.05" />
 
                     <TextView
                         android:id="@+id/tvBMI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="--"
-                        android:textSize="48sp"
+                        android:textSize="56sp"
                         android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:letterSpacing="0.02"
                         android:layout_marginTop="8dp" />
 
-                    <TextView
-                        android:id="@+id/tvBMICategory"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:layout_marginTop="4dp" />
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#1A1A1A"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#333333"
+                        android:layout_marginTop="12dp">
+
+                        <TextView
+                            android:id="@+id/tvBMICategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Calculate your BMI"
+                            android:textSize="12sp"
+                            android:textColor="#CCCCCC"
+                            android:letterSpacing="0.02"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="6dp" />
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Add New Measurement Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add New Measurement"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
                 android:layout_marginBottom="16dp" />
 
+            <!-- Weight Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Weight (kg) *">
+                android:hint="Weight (kg) *"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Height Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilHeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Height (cm) *"
-                android:layout_marginTop="16dp">
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etHeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Body Fat Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBodyFat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Body Fat (%)"
-                android:layout_marginTop="16dp">
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBodyFat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Body Measurements Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Body Measurements (cm)"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="24dp" />
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp" />
 
+            <!-- Chest & Waist Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilChest"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Chest">
+                    android:hint="Chest"
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etChest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -160,34 +279,57 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Waist"
-                    android:layout_marginStart="8dp">
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etWaist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <!-- Hips & Left Arm Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilHips"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Hips">
+                    android:hint="Hips"
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHips"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -196,34 +338,57 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Left Arm"
-                    android:layout_marginStart="8dp">
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLeftArm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <!-- Right Arm & Left Thigh Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilRightArm"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Right Arm">
+                    android:hint="Right Arm"
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRightArm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -232,35 +397,68 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Left Thigh"
-                    android:layout_marginStart="8dp">
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLeftThigh"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <!-- Right Thigh Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilRightThigh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Right Thigh"
-                android:layout_marginTop="8dp">
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRightThigh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Notes Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Notes (Optional)"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -268,24 +466,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:minLines="2" />
+                    android:minLines="2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="Save Measurement"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                app:backgroundTint="#FFFFFF"
+                app:cornerRadius="14dp"
+                app:elevation="0dp"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconTint="#000000"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
                 android:layout_marginTop="24dp" />
 
+            <!-- Measurement History Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Measurement History"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="16dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMetrics"
@@ -293,4 +507,5 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
         </LinearLayout>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -4,138 +4,362 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:fillViewport="true"
-    android:padding="16dp"
     tools:context=".ScheduleWorkoutActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/gradient_header_bw"
+            android:padding="28dp"
+            android:paddingTop="56dp"
+            android:paddingBottom="32dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
+                android:gravity="center_vertical">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@android:drawable/ic_menu_today"
-                    android:contentDescription="Schedule icon"
-                    android:layout_marginEnd="12dp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    android:layout_marginEnd="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_today"
+                        android:contentDescription="Schedule icon"
+                        android:tint="#FFFFFF"
+                        android:layout_gravity="center" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Schedule Workout"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Schedule Workout"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:letterSpacing="0.02" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plan your training session"
+                        android:textSize="14sp"
+                        android:textColor="#CCCCCC"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-light" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Content Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Workout Routine Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#333333"
+                app:cardBackgroundColor="#0D0D0D"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#1A1A1A"
+                        android:layout_marginEnd="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            android:contentDescription="Routine"
+                            android:tint="#FFFFFF"
+                            android:layout_gravity="center" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selected Routine"
+                            android:textSize="12sp"
+                            android:textColor="#999999"
+                            android:fontFamily="sans-serif-light" />
+
+                        <TextView
+                            android:id="@+id/tvRoutineName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Workout Routine"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF"
+                            android:letterSpacing="0.01"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Date & Time Section -->
             <TextView
-                android:id="@+id/tvRoutineName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Workout Routine"
-                android:textSize="18sp"
+                android:text="Date &amp; Time"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="24dp" />
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
+                android:layout_marginBottom="12dp" />
 
+            <!-- Date Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Date">
+                android:hint="Date"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
+                app:startIconTint="#999999"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Time Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Time"
-                android:layout_marginTop="16dp">
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                app:startIconDrawable="@android:drawable/ic_menu_recent_history"
+                app:startIconTint="#999999"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Reminder Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reminder"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="24dp" />
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp" />
 
-            <RadioGroup
-                android:id="@+id/rgReminder"
+            <!-- Reminder Options Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#333333"
+                app:cardBackgroundColor="#0D0D0D">
 
-                <RadioButton
-                    android:id="@+id/rb15min"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/rgReminder"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="15 minutes before"
-                    android:checked="true" />
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-                <RadioButton
-                    android:id="@+id/rb30min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="30 minutes before" />
+                    <RadioButton
+                        android:id="@+id/rb15min"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="15 minutes before"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:buttonTint="#FFFFFF"
+                        android:paddingStart="12dp"
+                        android:checked="true"
+                        android:background="?android:attr/selectableItemBackground" />
 
-                <RadioButton
-                    android:id="@+id/rb60min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1 hour before" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A1A1A"
+                        android:layout_marginHorizontal="12dp" />
 
-                <RadioButton
-                    android:id="@+id/rbNoReminder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No reminder" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/rb30min"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="30 minutes before"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:buttonTint="#FFFFFF"
+                        android:paddingStart="12dp"
+                        android:background="?android:attr/selectableItemBackground" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A1A1A"
+                        android:layout_marginHorizontal="12dp" />
+
+                    <RadioButton
+                        android:id="@+id/rb60min"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="1 hour before"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:buttonTint="#FFFFFF"
+                        android:paddingStart="12dp"
+                        android:background="?android:attr/selectableItemBackground" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A1A1A"
+                        android:layout_marginHorizontal="12dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbNoReminder"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="No reminder"
+                        android:textColor="#999999"
+                        android:textSize="15sp"
+                        android:buttonTint="#FFFFFF"
+                        android:paddingStart="12dp"
+                        android:background="?android:attr/selectableItemBackground" />
+                </RadioGroup>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Notes Input -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Additional Notes"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Notes (Optional)"
-                android:layout_marginTop="24dp">
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:minLines="3" />
+                    android:minLines="3"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <!-- Schedule Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSchedule"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="Schedule Workout"
-                android:drawableStart="@android:drawable/ic_menu_today"
-                android:drawablePadding="8dp"
-                android:layout_marginTop="24dp" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                app:backgroundTint="#FFFFFF"
+                app:cornerRadius="14dp"
+                app:elevation="0dp"
+                app:icon="@android:drawable/ic_menu_today"
+                app:iconTint="#000000"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp" />
         </LinearLayout>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

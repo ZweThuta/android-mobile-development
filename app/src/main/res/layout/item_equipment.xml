@@ -3,29 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="6dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
-    app:strokeWidth="0dp"
-    app:cardBackgroundColor="@color/card_background">
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#333333"
+    app:cardBackgroundColor="#1A1A1A">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Header with gradient background -->
-        <View
-            android:id="@+id/gradientHeader"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/card_gradient_accent"
+        <!-- Equipment Icon -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/equipmentIconCard"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#262626"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_compass"
+                android:contentDescription="Equipment"
+                android:tint="#FFFFFF"
+                android:layout_gravity="center" />
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Equipment Name -->
         <TextView
@@ -33,70 +44,77 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Equipment Name"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/text_on_accent"
+            android:textColor="#FFFFFF"
+            android:letterSpacing="0.01"
             android:maxLines="1"
             android:ellipsize="end"
-            app:layout_constraintTop_toTopOf="@+id/gradientHeader"
-            app:layout_constraintStart_toStartOf="@+id/gradientHeader"
-            app:layout_constraintEnd_toStartOf="@+id/actionLayout"
+            app:layout_constraintTop_toTopOf="@+id/equipmentIconCard"
+            app:layout_constraintBottom_toBottomOf="@+id/equipmentIconCard"
+            app:layout_constraintStart_toEndOf="@+id/equipmentIconCard"
+            app:layout_constraintEnd_toStartOf="@+id/cbCompleted"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp" />
+            android:layout_marginEnd="8dp" />
 
-        <!-- Right side actions (Checkbox + Delete) -->
-        <LinearLayout
-            android:id="@+id/actionLayout"
+        <!-- Completed Checkbox -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbCompleted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toTopOf="@+id/gradientHeader"
-            app:layout_constraintEnd_toEndOf="@+id/gradientHeader"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp">
+            android:text="Done"
+            android:textSize="12sp"
+            android:textColor="#CCCCCC"
+            app:buttonTint="#FFFFFF"
+            app:layout_constraintTop_toTopOf="@+id/equipmentIconCard"
+            app:layout_constraintBottom_toBottomOf="@+id/equipmentIconCard"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/cbCompleted"
+        <!-- Category Badge -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/categoryBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#262626"
+            app:layout_constraintTop_toBottomOf="@+id/equipmentIconCard"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Done"
-                android:textColor="@color/text_on_accent"
-                app:buttonTint="@color/text_on_accent"
-                android:layout_marginEnd="8dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Delete"
+                android:text="Category"
                 android:textSize="12sp"
-                android:textColor="@color/error"
-                app:cornerRadius="8dp"
-                app:icon="@android:drawable/ic_menu_delete"
-                app:iconTint="@color/error"
-                app:iconGravity="textStart"
-                app:iconPadding="2dp"
-                app:strokeColor="@color/error"
-                app:strokeWidth="1dp"
-                android:minWidth="80dp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                android:textColor="#999999"
+                android:letterSpacing="0.02"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-
-        <!-- Category -->
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Category"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary"
-            app:layout_constraintTop_toBottomOf="@+id/gradientHeader"
-            app:layout_constraintStart_toStartOf="parent"
+        <!-- Delete Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Delete"
+            android:textSize="12sp"
+            android:textColor="#DC2626"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconTint="#DC2626"
+            app:iconSize="16dp"
+            app:iconGravity="textStart"
+            app:iconPadding="4dp"
+            app:strokeColor="#DC2626"
+            app:strokeWidth="1dp"
+            android:minWidth="80dp"
+            app:layout_constraintTop_toBottomOf="@+id/equipmentIconCard"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

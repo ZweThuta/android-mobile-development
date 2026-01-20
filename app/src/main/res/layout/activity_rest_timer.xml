@@ -1,152 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:background="#000000"
+    android:fillViewport="true"
     tools:context=".RestTimerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <!-- Header Section -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="48dp">
+            android:orientation="vertical"
+            android:background="@drawable/gradient_header_bw"
+            android:padding="28dp"
+            android:paddingTop="56dp"
+            android:paddingBottom="32dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_lock_idle_alarm"
-                android:contentDescription="Timer icon"
-                android:layout_marginEnd="12dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    android:layout_marginEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_lock_idle_alarm"
+                        android:contentDescription="Timer icon"
+                        android:tint="#FFFFFF"
+                        android:layout_gravity="center" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rest Timer"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:letterSpacing="0.02" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Take a break between sets"
+                        android:textSize="14sp"
+                        android:textColor="#CCCCCC"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-light" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Timer Display Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <!-- Timer Circle -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                app:cardCornerRadius="120dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="3dp"
+                app:strokeColor="#333333"
+                app:cardBackgroundColor="#0D0D0D"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvTimer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00"
+                        android:textSize="56sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="sans-serif-light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="minutes : seconds"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Quick Time Selection Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rest Timer"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:text="Quick Select"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
+                android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/tvTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00"
-            android:textSize="72sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="48dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="32dp">
-
-            <Button
-                android:id="@+id/btn30s"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="30s"
-                android:layout_marginEnd="8dp" />
-
-            <Button
-                android:id="@+id/btn1min"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1 min"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp" />
-
-            <Button
-                android:id="@+id/btn2min"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2 min"
-                android:layout_marginStart="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="32dp">
-
-            <Button
-                android:id="@+id/btn3min"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3 min"
-                android:layout_marginEnd="8dp" />
-
-            <Button
-                android:id="@+id/btn5min"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="5 min"
-                android:layout_marginStart="8dp" />
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilCustomTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Custom time (seconds)"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCustomTime"
+            <!-- Time Preset Row 1 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="12dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="32dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn30s"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="30s"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1A1A1A"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#333333"
+                    android:layout_marginEnd="6dp" />
 
-            <Button
-                android:id="@+id/btnStart"
-                android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn1min"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="1 min"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1A1A1A"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#333333"
+                    android:layout_marginHorizontal="6dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn2min"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="2 min"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1A1A1A"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#333333"
+                    android:layout_marginStart="6dp" />
+            </LinearLayout>
+
+            <!-- Time Preset Row 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Start"
-                android:layout_marginEnd="8dp" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
 
-            <Button
-                android:id="@+id/btnPause"
-                android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn3min"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="3 min"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1A1A1A"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#333333"
+                    android:layout_marginEnd="6dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn5min"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="5 min"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1A1A1A"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#333333"
+                    android:layout_marginStart="6dp" />
+            </LinearLayout>
+
+            <!-- Custom Time Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCustomTime"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Pause"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:enabled="false" />
+                android:hint="Custom time (seconds)"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginBottom="32dp">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCustomTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Control Buttons Row 1: Start & Pause -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStart"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="Start"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    app:backgroundTint="#FFFFFF"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:icon="@android:drawable/ic_media_play"
+                    app:iconTint="#000000"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
+                    android:layout_marginEnd="6dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPause"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="Pause"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1A1A1A"
+                    app:cornerRadius="14dp"
+                    app:elevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#333333"
+                    app:icon="@android:drawable/ic_media_pause"
+                    app:iconTint="#FFFFFF"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
+                    android:layout_marginStart="6dp"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Control Buttons Row 2: Reset (full width) -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReset"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Reset"
-                android:layout_marginStart="8dp" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Reset Timer"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#DC2626"
+                app:cornerRadius="14dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#DC2626"
+                app:icon="@android:drawable/ic_menu_revert"
+                app:iconTint="#DC2626"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </LinearLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

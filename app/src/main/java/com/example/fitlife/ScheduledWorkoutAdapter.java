@@ -65,6 +65,25 @@ public class ScheduledWorkoutAdapter extends RecyclerView.Adapter<ScheduledWorko
         return scheduledWorkouts.size();
     }
 
+    public ScheduledWorkout getItemAt(int position) {
+        if (position >= 0 && position < scheduledWorkouts.size()) {
+            return scheduledWorkouts.get(position);
+        }
+        return null;
+    }
+
+    public void removeAt(int position) {
+        if (position >= 0 && position < scheduledWorkouts.size()) {
+            scheduledWorkouts.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void restoreItem(ScheduledWorkout item, int position) {
+        scheduledWorkouts.add(position, item);
+        notifyItemInserted(position);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvRoutineName, tvDateTime, tvStatus, tvReminder;
         android.widget.Button btnComplete, btnCancel;

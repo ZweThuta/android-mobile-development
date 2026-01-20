@@ -2,14 +2,22 @@ package com.example.fitlife;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +25,7 @@ import com.example.fitlife.data.FitLifeDatabase;
 import com.example.fitlife.data.WorkoutRoutine;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +73,146 @@ public class WorkoutRoutineListActivity extends AppCompatActivity {
         rvWorkoutRoutines.setLayoutManager(new LinearLayoutManager(this));
         rvWorkoutRoutines.setAdapter(adapter);
 
+        // Setup swipe gestures (left to delete, right to edit)
+        setupSwipeGestures();
+
         fabAddWorkout.setOnClickListener(v -> {
             startActivity(new Intent(WorkoutRoutineListActivity.this, CreateWorkoutRoutineActivity.class));
         });
 
         loadRoutines();
+    }
+
+    private void setupSwipeGestures() {
+        ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            private final ColorDrawable deleteBackground = new ColorDrawable(Color.parseColor("#DC2626"));
+            private final ColorDrawable editBackground = new ColorDrawable(Color.parseColor("#FFFFFF"));
+            private final Paint deleteTextPaint = new Paint();
+            private final Paint editTextPaint = new Paint();
+
+            {
+                deleteTextPaint.setColor(Color.WHITE);
+                deleteTextPaint.setTextSize(48f);
+                deleteTextPaint.setAntiAlias(true);
+                deleteTextPaint.setTextAlign(Paint.Align.RIGHT);
+
+                editTextPaint.setColor(Color.parseColor("#000000"));
+                editTextPaint.setTextSize(48f);
+                editTextPaint.setAntiAlias(true);
+                editTextPaint.setTextAlign(Paint.Align.LEFT);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, 
+                                  @NonNull RecyclerView.ViewHolder viewHolder, 
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                WorkoutRoutine routine = adapter.getRoutineAt(position);
+                
+                if (routine != null) {
+                    if (direction == ItemTouchHelper.LEFT) {
+                        // Swipe left - Delete
+                        adapter.removeAt(position);
+                        updateEmptyState();
+
+                        Snackbar snackbar = Snackbar.make(rvWorkoutRoutines, 
+                                "\"" + routine.name + "\" deleted", 
+                                Snackbar.LENGTH_LONG);
+                        
+                        snackbar.setAction("UNDO", v -> {
+                            adapter.restoreItem(routine, position);
+                            updateEmptyState();
+                        });
+                        
+                        snackbar.setActionTextColor(Color.WHITE);
+                        snackbar.setBackgroundTint(Color.parseColor("#1A1A1A"));
+                        snackbar.setTextColor(Color.WHITE);
+                        
+                        snackbar.addCallback(new Snackbar.Callback() {
+                            @Override
+                            public void onDismissed(Snackbar transientBottomBar, int event) {
+                                if (event != DISMISS_EVENT_ACTION) {
+                                    database.workoutRoutineDao().delete(routine.id);
+                                }
+                            }
+                        });
+                        
+                        snackbar.show();
+                    } else if (direction == ItemTouchHelper.RIGHT) {
+                        // Swipe right - Edit
+                        adapter.notifyItemChanged(position); // Reset the swipe
+                        editRoutine(routine);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                    @NonNull RecyclerView.ViewHolder viewHolder, 
+                                    float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                
+                View itemView = viewHolder.itemView;
+                
+                if (dX < 0) {
+                    // Swiping left - show red delete background
+                    deleteBackground.setBounds(
+                            itemView.getRight() + (int) dX,
+                            itemView.getTop(),
+                            itemView.getRight(),
+                            itemView.getBottom()
+                    );
+                    deleteBackground.draw(c);
+
+                    float textY = itemView.getTop() + (itemView.getHeight() / 2f) + (deleteTextPaint.getTextSize() / 3f);
+                    float textX = itemView.getRight() - 60f;
+                    
+                    if (Math.abs(dX) > 150) {
+                        c.drawText("Delete", textX, textY, deleteTextPaint);
+                    }
+                } else if (dX > 0) {
+                    // Swiping right - show white edit background
+                    editBackground.setBounds(
+                            itemView.getLeft(),
+                            itemView.getTop(),
+                            itemView.getLeft() + (int) dX,
+                            itemView.getBottom()
+                    );
+                    editBackground.draw(c);
+
+                    float textY = itemView.getTop() + (itemView.getHeight() / 2f) + (editTextPaint.getTextSize() / 3f);
+                    float textX = itemView.getLeft() + 60f;
+                    
+                    if (dX > 150) {
+                        c.drawText("Edit", textX, textY, editTextPaint);
+                    }
+                }
+                
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public float getSwipeThreshold(@NonNull RecyclerView.ViewHolder viewHolder) {
+                return 0.4f;
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
+        itemTouchHelper.attachToRecyclerView(rvWorkoutRoutines);
+    }
+
+    private void updateEmptyState() {
+        if (routines.isEmpty()) {
+            emptyState.setVisibility(View.VISIBLE);
+            rvWorkoutRoutines.setVisibility(View.GONE);
+        } else {
+            emptyState.setVisibility(View.GONE);
+            rvWorkoutRoutines.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -81,15 +225,7 @@ public class WorkoutRoutineListActivity extends AppCompatActivity {
         routines.clear();
         routines.addAll(database.workoutRoutineDao().getRoutinesByUser(userId));
         adapter.notifyDataSetChanged();
-        
-        // Show/hide empty state
-        if (routines.isEmpty()) {
-            emptyState.setVisibility(View.VISIBLE);
-            rvWorkoutRoutines.setVisibility(View.GONE);
-        } else {
-            emptyState.setVisibility(View.GONE);
-            rvWorkoutRoutines.setVisibility(View.VISIBLE);
-        }
+        updateEmptyState();
     }
 
     public void deleteRoutine(WorkoutRoutine routine) {

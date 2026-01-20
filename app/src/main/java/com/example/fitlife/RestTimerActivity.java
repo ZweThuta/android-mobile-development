@@ -1,8 +1,14 @@
 package com.example.fitlife;
 
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.WindowManager;
@@ -10,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -24,6 +31,8 @@ public class RestTimerActivity extends AppCompatActivity {
     private long timeLeftInMillis = 0;
     private boolean timerRunning = false;
     private Vibrator vibrator;
+    private MediaPlayer mediaPlayer;
+    private Ringtone alarmRingtone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,28 +150,106 @@ public class RestTimerActivity extends AppCompatActivity {
     }
 
     private void onTimerFinished() {
-        // Vibrate
+        // Vibrate with a strong pattern
         if (vibrator != null && vibrator.hasVibrator()) {
+            long[] vibrationPattern = {0, 500, 200, 500, 200, 500, 200, 500};
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{0, 500, 200, 500}, -1));
+                vibrator.vibrate(VibrationEffect.createWaveform(vibrationPattern, -1));
             } else {
-                vibrator.vibrate(new long[]{0, 500, 200, 500}, -1);
+                vibrator.vibrate(vibrationPattern, -1);
             }
         }
 
-        // Play sound (system notification sound)
-        try {
-            android.media.RingtoneManager.getRingtone(
-                getApplicationContext(),
-                android.media.RingtoneManager.getDefaultUri(android.media.RingtoneManager.TYPE_NOTIFICATION)
-            ).play();
-        } catch (Exception e) {
-            // Ignore if sound can't play
-        }
+        // Play alarm sound
+        playAlarmSound();
 
-        Toast.makeText(this, "Rest time is over! 💪", Toast.LENGTH_LONG).show();
+        // Show completion dialog
+        showTimerCompleteDialog();
+
         btnStart.setEnabled(true);
         btnPause.setEnabled(false);
+    }
+
+    private void playAlarmSound() {
+        try {
+            // Try to use alarm sound first, then fall back to notification
+            Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            if (alarmUri == null) {
+                alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            }
+            if (alarmUri == null) {
+                alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            }
+
+            // Stop any previously playing alarm
+            stopAlarmSound();
+
+            // Use MediaPlayer for better control
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(this, alarmUri);
+            
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build());
+            }
+            
+            mediaPlayer.setLooping(true); // Loop until user dismisses
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+
+            // Auto-stop after 30 seconds if user doesn't dismiss
+            new Handler(Looper.getMainLooper()).postDelayed(this::stopAlarmSound, 30000);
+
+        } catch (Exception e) {
+            // Fallback to ringtone if MediaPlayer fails
+            try {
+                Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                if (alarmUri == null) {
+                    alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                }
+                alarmRingtone = RingtoneManager.getRingtone(getApplicationContext(), alarmUri);
+                if (alarmRingtone != null) {
+                    alarmRingtone.play();
+                }
+            } catch (Exception ex) {
+                // Ignore if sound can't play
+            }
+        }
+    }
+
+    private void stopAlarmSound() {
+        try {
+            if (mediaPlayer != null) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+            if (alarmRingtone != null) {
+                if (alarmRingtone.isPlaying()) {
+                    alarmRingtone.stop();
+                }
+                alarmRingtone = null;
+            }
+        } catch (Exception e) {
+            // Ignore cleanup errors
+        }
+    }
+
+    private void showTimerCompleteDialog() {
+        new AlertDialog.Builder(this, R.style.AlertDialogTheme)
+                .setTitle("Time's Up!")
+                .setMessage("Your rest period is complete. Ready to continue your workout?")
+                .setPositiveButton("Got it!", (dialog, which) -> {
+                    stopAlarmSound();
+                    dialog.dismiss();
+                })
+                .setCancelable(false)
+                .setOnDismissListener(dialog -> stopAlarmSound())
+                .show();
     }
 
     @Override
@@ -171,6 +258,20 @@ public class RestTimerActivity extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+        stopAlarmSound();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Don't stop alarm on pause - user should hear it even if app goes to background
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Stop alarm when activity is no longer visible (user navigated away)
+        // but keep timer running
     }
 }

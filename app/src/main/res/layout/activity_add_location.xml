@@ -4,87 +4,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:fillViewport="true"
     tools:context=".AddLocationActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:background="@drawable/gradient_header_bw"
+            android:padding="28dp"
+            android:paddingTop="56dp"
+            android:paddingBottom="32dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    android:layout_marginEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_input_add"
+                        android:contentDescription="Add location icon"
+                        android:tint="#FFFFFF"
+                        android:layout_gravity="center" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Location"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:letterSpacing="0.02" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Save your workout place"
+                        android:textSize="14sp"
+                        android:textColor="#CCCCCC"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-light" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Form Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Location Name Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLocationName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Location Name">
+                android:hint="Location Name"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLocationName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Address Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Type Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Type (e.g., gym, park, yoga studio)"
+                app:hintTextColor="#999999"
+                app:boxStrokeColor="#333333"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxBackgroundColor="#0D0D0D"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etType"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Coordinates Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location Coordinates"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textColor="#FFFFFF"
+                android:letterSpacing="0.02"
+                android:layout_marginTop="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter coordinates manually or use location services"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:fontFamily="sans-serif-light"
                 android:layout_marginTop="4dp" />
 
+            <!-- Latitude and Longitude Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilLatitude"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Latitude">
+                    android:hint="Latitude"
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLatitude"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal|numberSigned" />
+                        android:inputType="numberDecimal|numberSigned"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -93,53 +212,104 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Longitude"
-                    android:layout_marginStart="8dp">
+                    app:hintTextColor="#999999"
+                    app:boxStrokeColor="#333333"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxBackgroundColor="#0D0D0D"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLongitude"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal|numberSigned" />
+                        android:inputType="numberDecimal|numberSigned"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <Button
+            <!-- Get Current Location Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGetCurrentLocation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:text="Use Current Location (GPS)"
-                android:layout_marginTop="8dp" />
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#1A1A1A"
+                app:cornerRadius="14dp"
+                app:elevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#333333"
+                app:icon="@android:drawable/ic_menu_mylocation"
+                app:iconTint="#FFFFFF"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:layout_marginTop="12dp" />
 
+            <!-- Map Note -->
             <TextView
                 android:id="@+id/tvMapNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Note: Map view requires Google Maps API key"
                 android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="#666666"
+                android:fontFamily="sans-serif-light"
                 android:layout_marginTop="16dp"
                 android:visibility="gone" />
 
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <!-- Map Container -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="8dp" />
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#333333"
+                android:layout_marginTop="16dp">
 
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Coordinates Display -->
             <TextView
                 android:id="@+id/tvCoordinates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Coordinates: Not set"
-                android:textSize="12sp"
-                android:layout_marginTop="8dp" />
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="12dp" />
 
-            <Button
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="Save Location"
-                android:layout_marginTop="16dp" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                app:backgroundTint="#FFFFFF"
+                app:cornerRadius="14dp"
+                app:elevation="0dp"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconTint="#000000"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

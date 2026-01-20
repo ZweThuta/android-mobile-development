@@ -53,6 +53,25 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return locations.size();
     }
 
+    public WorkoutLocation getItemAt(int position) {
+        if (position >= 0 && position < locations.size()) {
+            return locations.get(position);
+        }
+        return null;
+    }
+
+    public void removeAt(int position) {
+        if (position >= 0 && position < locations.size()) {
+            locations.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void restoreItem(WorkoutLocation item, int position) {
+        locations.add(position, item);
+        notifyItemInserted(position);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvLocationName, tvAddress, tvType;
         android.widget.Button btnViewOnMap, btnDelete;
