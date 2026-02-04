@@ -29,11 +29,11 @@ public class WorkoutHistory {
     
     public long userId;
     public long routineId;
-    public long completedAt; // Timestamp in milliseconds
-    public int duration; // Duration in minutes
+    public long completedAt;
+    public int duration;
     public String notes;
-    public int rating; // 1-5 stars
-    public int exercisesCompleted; // Number of exercises completed
+    public int rating;
+    public int exercisesCompleted;
     
     public WorkoutHistory(long userId, long routineId, long completedAt) {
         this.userId = userId;

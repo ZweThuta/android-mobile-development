@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        // Clear previous errors
         tilEmail.setError(null);
         tilPassword.setError(null);
 
@@ -63,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
 
         boolean isValid = true;
 
-        // Validate Email
         if (TextUtils.isEmpty(email)) {
             tilEmail.setError("Email is required");
             tilEmail.requestFocus();
@@ -74,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Validate Password
         if (TextUtils.isEmpty(password)) {
             tilPassword.setError("Password is required");
             if (isValid) {
@@ -93,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Attempt login
         User user = database.userDao().login(email, password);
         if (user != null) {
             // Save user ID to SharedPreferences

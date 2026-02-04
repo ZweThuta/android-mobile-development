@@ -146,16 +146,15 @@ public class CreateWorkoutRoutineActivity extends AppCompatActivity implements S
     
     private void setupSwipeGestures() {
         ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(
-            0, // No drag & drop
-            ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT // Swipe both directions
+            0,
+            ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
         ) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, 
                                 @NonNull RecyclerView.ViewHolder viewHolder, 
                                 @NonNull RecyclerView.ViewHolder target) {
-                return false; // No drag & drop
+                return false;
             }
-            
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();

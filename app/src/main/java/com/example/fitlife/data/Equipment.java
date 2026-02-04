@@ -21,7 +21,7 @@ public class Equipment {
     
     public long routineId;
     public String name;
-    public String category; // e.g., "strength equipment", "mats", "accessories"
+    public String category;
     public boolean isCompleted;
     
     public Equipment(long routineId, String name, String category) {

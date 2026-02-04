@@ -79,7 +79,6 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         int totalWorkouts = database.workoutHistoryDao().getTotalWorkoutsCompleted(userId);
         tvTotalWorkouts.setText(String.valueOf(totalWorkouts));
 
-        // This week
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -87,7 +86,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
         long weekStart = calendar.getTimeInMillis();
-        
+
         int thisWeek = database.workoutHistoryDao().getWorkoutsCompletedSince(userId, weekStart);
         tvThisWeek.setText(String.valueOf(thisWeek));
 
@@ -101,7 +100,6 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         } else {
             tvTotalTime.setText(minutes + "m");
         }
-
         // Average rating
         Double avgRating = database.workoutHistoryDao().getAverageRating(userId);
         if (avgRating == null || avgRating == 0) {

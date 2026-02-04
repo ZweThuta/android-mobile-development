@@ -71,7 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-        // Clear previous errors
         tilUsername.setError(null);
         tilEmail.setError(null);
         tilPassword.setError(null);
@@ -84,7 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         boolean isValid = true;
 
-        // Validate Username
         if (TextUtils.isEmpty(username)) {
             tilUsername.setError("Username is required");
             tilUsername.requestFocus();
@@ -103,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Validate Email
         if (TextUtils.isEmpty(email)) {
             tilEmail.setError("Email is required");
             if (isValid) {
@@ -127,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
 
-        // Validate Password
         if (TextUtils.isEmpty(password)) {
             tilPassword.setError("Password is required");
             if (isValid) {
@@ -148,7 +144,6 @@ public class RegisterActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Validate Confirm Password
         if (TextUtils.isEmpty(confirmPassword)) {
             tilConfirmPassword.setError("Please confirm your password");
             if (isValid) {
@@ -167,7 +162,6 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // Attempt registration
         User user = new User(username, email, password);
         long userId = database.userDao().insert(user);
 

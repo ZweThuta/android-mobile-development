@@ -18,7 +18,7 @@ public interface WorkoutRoutineDao {
     
     @Query("SELECT * FROM workout_routines WHERE id = :id LIMIT 1")
     WorkoutRoutine getRoutineById(long id);
-    
+     
     @Update
     void update(WorkoutRoutine routine);
     

@@ -29,18 +29,17 @@ public class ScheduledWorkout {
     
     public long userId;
     public long routineId;
-    public String scheduledDate; // Format: "yyyy-MM-dd"
-    public String scheduledTime; // Format: "HH:mm"
-    public String status; // "scheduled", "completed", "cancelled", "skipped"
-    public long reminderTime; // Minutes before workout (e.g., 15, 30, 60)
+    public String scheduledDate;
+    public String scheduledTime;
+    public String status;
+    public long reminderTime;
     public String notes;
-    
     public ScheduledWorkout(long userId, long routineId, String scheduledDate, String scheduledTime) {
         this.userId = userId;
         this.routineId = routineId;
         this.scheduledDate = scheduledDate;
         this.scheduledTime = scheduledTime;
         this.status = "scheduled";
-        this.reminderTime = 15; // Default 15 minutes
+        this.reminderTime = 15;
     }
 }

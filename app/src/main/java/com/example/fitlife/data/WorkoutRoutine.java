@@ -24,7 +24,7 @@ public class WorkoutRoutine {
     public String description;
     public String imagePath;
     public boolean isCompleted;
-    public Long locationId; // Reference to WorkoutLocation
+    public Long locationId;
     
     public WorkoutRoutine(long userId, String name, String description) {
         this.userId = userId;
